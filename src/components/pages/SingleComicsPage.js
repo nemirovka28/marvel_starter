@@ -9,25 +9,25 @@ import xMen from '../../resources/img/x-men.png';
 const SingleComicPage = () => {
 
     const {comicId} = useParams();
-    const [comic, setComic] = useState(null);
+    const [comics, setComics] = useState(null);
     const {loading,error,getComics, clearError} = useMarvelService();
 
     useEffect(()=> {
-        updateComic();
+        updateComics();
      }, [comicId])
 
-     const updateComic = () => {
+     const updateComics = () => {
         clearError();
         getComics(comicId).then(onComicLoaded)
     }
 
-    const onComicLoaded = comic => {
-        setComic(comic);
+    const onComicLoaded = comics => {
+        setComics(comics);
     }
 
     const errorMassage = error ? <ErrorMassage/> : null;
     const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error || !comic) ? <View comic = {comic}/>: null;
+    const content = !(loading || error || !comics) ? <View comics = {comics}/>: null;
 
     return (
         <>
@@ -38,8 +38,8 @@ const SingleComicPage = () => {
     )
 }
 
-const View = ({comic}) => {
-    const {title, description, pageCount, thumbnail, language, price} = comic;
+const View = ({comics}) => {
+    const {title, description, pageCount, thumbnail, language, price} = comics;
     return (
         <div className="single-comic">
         <img src={thumbnail} alt={title} className="single-comic__img"/>

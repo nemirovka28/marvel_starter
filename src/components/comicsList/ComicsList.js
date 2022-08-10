@@ -45,7 +45,7 @@ const ComicsList = () => {
                 <Link to = {`/comics/${item.id}`}>
                     <img src={item.thumbnail} alt={item.title} className="comics__item-img"/>
                     <div className="comics__item-name">{item.title}</div>
-                    <div className="comics__item-price">{item.prices > 0 ? item.prices+'$' : 'NOT AVAILABLE ' }</div>
+                    <div className="comics__item-price">{item.price}</div>
                 </Link>
             </li>
             )

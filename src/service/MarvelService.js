@@ -24,6 +24,7 @@ import { useHttp } from "../hooks/http.hook";
 
     const getComics = async (id) => {
         const res = await request(`${_APIBASE}comics/${id}?${_APIKEY}`);
+        console.log(res.data.results[0].prices[0].price)
         return _transformComics(res.data.results[0]);
     }
     
@@ -38,13 +39,14 @@ import { useHttp } from "../hooks/http.hook";
             comics: char.comics.items
         }
     }
-    const  _transformComics = (char) => {
+    const  _transformComics = (comics) => {
         return {
-            id: char.id,
-            title: char.title,
-            thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
-            prices: char.prices[0].price,
-            description: char.description || 'There is no description for this character',
+            id: comics.id,
+            title: comics.title,
+            thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
+            price: comics.prices[0].price ? `${comics.prices[0].price}$` : 'not available',
+            description: comics.description || 'There is no description for this character',
+            language: comics.textObjects.language || 'en-us',
 
         }
     }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'; 
+import {useParams, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useMarvelService from '../../service/MarvelService.js';
 import Spinner from '../spinner/Spinner'
@@ -44,7 +45,7 @@ const CharInfo = (props) => {
 }
 
 const View = ({char}) => {
-    const {name, description, thumbnail, homepage, wiki,comics} = char;
+    const {name, description, thumbnail, homepage, wiki,comics,id} = char;
     let imgStyle = {'objectFit' : 'cover'};
     if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
         imgStyle = {'objectFit' : 'contain'};
@@ -75,9 +76,10 @@ const View = ({char}) => {
                         comics.map((item, i) => {
                             if (i > 9)return;
                             return (
-                                <li key = {i} className="char__comics-item">
-                                    {item.name}
+                                <li key = {id} className="char__comics-item">
+                                    <Link to = {`/comics/${item.resourceURI.split('').filter(el=>Number(el)).join('')}`}>{item.name}</Link> 
                                 </li>
+
                             )
                         })
                     }
