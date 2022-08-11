@@ -4,7 +4,6 @@ import useMarvelService from '../../service/MarvelService.js';
 import Spinner from '../spinner/Spinner'
 import ErrorMassage from '../errorMassage/errorMassage';
 import './singleComicPage.scss';
-import xMen from '../../resources/img/x-men.png';
 
 const SingleComicPage = () => {
 

@@ -24,8 +24,13 @@ import { useHttp } from "../hooks/http.hook";
 
     const getComics = async (id) => {
         const res = await request(`${_APIBASE}comics/${id}?${_APIKEY}`);
-        console.log(res.data.results[0].prices[0].price)
         return _transformComics(res.data.results[0]);
+    }
+
+    const getCharacterByName = async (name) => {
+        const res = await request(`${_APIBASE}characters?name=${name}&${_APIKEY}`);
+        console.log(name)
+        return res.data.results.map(_transformCharacter);
     }
     
     const  _transformCharacter = (char) => {
@@ -51,6 +56,6 @@ import { useHttp } from "../hooks/http.hook";
         }
     }
 
-    return {loading, error, clearError, getAllCharacters, getCharacters,getComics,getAllComics};
+    return {loading, error, clearError, getAllCharacters, getCharacters,getComics,getAllComics,getCharacterByName};
 }
 export default useMarvelService;

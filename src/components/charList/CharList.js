@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef,useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMassage/errorMassage';
 import useMarvelService from '../../service/MarvelService';
+
 import './charList.scss';
 
 
@@ -87,7 +88,6 @@ const CharList = (props) => {
 
         const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading && !newItemLoading ? <Spinner/> : null;
-
         return (
             <div className="char__list">
                 {errorMessage}
